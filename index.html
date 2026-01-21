@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todoist Clone - Organize your work and life</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✓</text></svg>">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                </svg>
+            </button>
+            <div class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#DE483A">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <span class="logo-text">Todoist Clone</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications" title="Notifications">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Quick Add Button -->
+                <button class="quick-add-btn" id="quickAddBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <span>Add task</span>
+                    <kbd class="kbd">q</kbd>
+                </button>
+
+                <!-- Projects List -->
+                <div class="projects-section">
+                    <div class="projects-list" id="projectsList">
+                        <!-- Default Projects -->
+                        <div class="project-item active" data-project-id="inbox">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="project-icon">
+                                <path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5v-3h3.56c.69 1.19 1.97 2 3.44 2s2.75-.81 3.44-2H19v3zm0-5h-4.99c0 1.1-.9 2-2 2s-2-.9-2-2H5V5h14v9z"/>
+                            </svg>
+                            <span class="project-name">Inbox</span>
+                            <span class="task-count" data-project="inbox">0</span>
+                        </div>
+
+                        <div class="project-item" data-project-id="today">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="project-icon">
+                                <path fill="#058527" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                            </svg>
+                            <span class="project-name">Today</span>
+                            <span class="task-count" data-project="today">0</span>
+                        </div>
+
+                        <div class="project-item" data-project-id="upcoming">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="project-icon">
+                                <path fill="#750985" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z"/>
+                            </svg>
+                            <span class="project-name">Upcoming</span>
+                            <span class="task-count" data-project="upcoming">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Projects Header -->
+                    <div class="projects-header">
+                        <button class="section-toggle" id="projectsToggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="toggle-icon">
+                                <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </button>
+                        <h2 class="section-title">Projects</h2>
+                        <button class="add-project-btn" id="addProjectBtn" title="Add project">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Custom Projects -->
+                    <div class="custom-projects" id="customProjects"></div>
+
+                    <!-- Add Project Form -->
+                    <div class="add-project-form hidden" id="addProjectForm">
+                        <input type="text" class="project-input" id="projectInput" placeholder="Project name" maxlength="120">
+                        <div class="form-actions">
+                            <button class="btn btn-primary" id="saveProjectBtn">Add</button>
+                            <button class="btn btn-secondary" id="cancelProjectBtn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title" id="contentTitle">Inbox</h1>
+                <div class="content-actions">
+                    <button class="icon-btn" title="View options">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tasks Container -->
+            <div class="tasks-container" id="tasksContainer">
+                <!-- Tasks will be dynamically inserted here -->
+            </div>
+
+            <!-- Add Task Button -->
+            <button class="add-task-btn" id="addTaskBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                <span>Add task</span>
+            </button>
+
+            <!-- Add Task Form -->
+            <div class="add-task-form hidden" id="addTaskForm">
+                <div class="task-input-container">
+                    <input type="text" class="task-input" id="taskInput" placeholder="Task name" maxlength="500">
+                    <textarea class="task-description" id="taskDescription" placeholder="Description" maxlength="16000"></textarea>
+                </div>
+                <div class="task-form-actions">
+                    <div class="task-options">
+                        <button class="task-option-btn" id="dueDateBtn" title="Due date">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z"/>
+                            </svg>
+                            <span id="dueDateText">Due date</span>
+                        </button>
+                        <button class="task-option-btn" id="priorityBtn" title="Priority">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+                            </svg>
+                            <span id="priorityText">Priority</span>
+                        </button>
+                        <input type="date" class="date-picker hidden" id="datePicker">
+                        <select class="priority-picker hidden" id="priorityPicker">
+                            <option value="4">Priority 4</option>
+                            <option value="3">Priority 3</option>
+                            <option value="2">Priority 2</option>
+                            <option value="1">Priority 1</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="cancelTaskBtn">Cancel</button>
+                        <button class="btn btn-primary" id="saveTaskBtn">Add task</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
